@@ -153,7 +153,7 @@ public class DynamicArray {
      */
     public void removeValue(int value) {
         for (int i = 0; i < size; i++) {
-            while (elementData[i] == value) {
+            while (elementData[i] == value && i < value) {
                 remove(i);
             }
         }
