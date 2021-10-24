@@ -62,18 +62,24 @@ public class DynamicArray {
      * @param data 元素的值
      */
     public void addIndex(int index, int data) {
-        if (rangeCheck(index)) {
-            if (index == 0) {
-                addFirst(data);
-            } else if (index == size) {
-                addLast(data);
-            } else {
-                for (int i = size; i > index; i--) {
-                    elementData[i] = elementData[i - 1];
-                }
-                elementData[index] = data;
-                size++;
+        if (index < 0 || index > size) {
+            System.out.println("index非法，无法进行插入");
+            return;
+        }
+        // 判断当前数组是否已满
+        if (size == elementData.length) {
+            grow();
+        }
+        if (index == 0) {
+            addFirst(data);
+        }else if (index == size) {
+            addLast(data);
+        }else {
+            for (int i = size; i > index; i--) {
+                elementData[i] = elementData[i - 1];
             }
+            elementData[index] = data;
+            size++;
         }
     }
 
@@ -89,22 +95,6 @@ public class DynamicArray {
 
     public int getSize() {
         return size;
-    }
-
-    /**
-     * 将当前动态数组转化为字符串
-     * @return 返回字符串
-     */
-    public String toString() {
-        String str = "[";
-        for (int i = 0; i < size; i++) {
-            str += elementData[i];
-            if (i != size - 1) {
-                str += ", ";
-            }
-        }
-        str += "]";
-        return str;
     }
 
     /**
@@ -198,5 +188,18 @@ public class DynamicArray {
         System.out.println(dynamicArray.get(1));
         //输出2
         System.out.println(dynamicArray.getSize());
+    }
+
+    @Override
+    public String toString() {
+        String str = "[";
+        for (int i = 0; i < size; i++) {
+            str += elementData[i];
+            if (i != size - 1) {
+                str += ", ";
+            }
+        }
+        str += "]";
+        return str;
     }
 }
