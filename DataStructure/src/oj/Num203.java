@@ -1,6 +1,7 @@
 package oj;
 
 public class Num203 {
+    //移除链表元素
     public ListNode removeElements(ListNode head, int val) {
         while (head != null && head.val == val) {
             ListNode node = head;
